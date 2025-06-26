@@ -1,0 +1,20 @@
+[project]
+name = "workmate_test_task"
+version = "0.1.0"
+description = "Фильтрация и агрегация csv файла. По сути - мини СУБД для csv"
+authors = [
+    { name="Sagin", email="malay2004tem@gmail.com" }
+]
+dependencies = [
+    "tabulate==0.9.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==8.4.1",
+    "pytest-cov==6.2.1"
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
