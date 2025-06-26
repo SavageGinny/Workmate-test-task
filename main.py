@@ -50,15 +50,16 @@ def aggregate(aggregate_str: str, products: list[dict]) -> dict[str : list]:
     aggregate_meaning = aggregate_conditions[1]
     res = {}
     if aggregate_conditions:
-        try:
-            float(products[0][aggregate_col_name])
-        except ValueError:
-            return {' ': ['error']}
+
         match aggregate_meaning:
             case 'avg':
                 avg_res = 0
                 counter = 0
                 for row in products:
+                    try:
+                        float(row[aggregate_col_name])
+                    except ValueError:
+                        return {' ': ['error']}
                     avg_res += float(row[aggregate_col_name])
                     counter += 1
                 avg_res /= counter
@@ -66,6 +67,10 @@ def aggregate(aggregate_str: str, products: list[dict]) -> dict[str : list]:
             case 'min':
                 min_res = float('inf')  # Начальное значение — бесконечность
                 for row in products:
+                    try:
+                        float(row[aggregate_col_name])
+                    except ValueError:
+                        return {' ': ['error']}
                     price = float(row[aggregate_col_name])
                     if price < min_res:
                         min_res = price
@@ -73,6 +78,10 @@ def aggregate(aggregate_str: str, products: list[dict]) -> dict[str : list]:
             case 'max':
                 max_res = 0
                 for row in products:
+                    try:
+                        float(row[aggregate_col_name])
+                    except ValueError:
+                        return {' ': ['error']}
                     price = float(row[aggregate_col_name])
                     if price > max_res:
                         max_res = price
